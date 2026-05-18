@@ -20,7 +20,14 @@ class CursoController extends Controller
         return view('cursos.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request){ //ESTE METODO SE ENCARGA DE GUARDAR LOS DATOS EN LA BASE DE DATOS CREATE 
+
+    //ANTES DE LA INTANCIA PASAMOS UNA VALIDACION DE LOS CAMPOS QUE VAMOS A GUARDAR 
+        $request->validate([
+            'name'=>['required','min:3'],
+            'descripcion'=>'required',
+            'categoria'=>'required'
+        ]);
 
         $curso = new Curso(); //hacemos intancia el modelo 
 
