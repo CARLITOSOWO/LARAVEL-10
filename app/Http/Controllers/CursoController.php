@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCurso;
 use App\Models\Curso;  //RECUERDA QUE TENEMOS QUE INDICARLE EL MODELO QUE VAMOS A USAR 
 use Illuminate\Http\Request;
 
@@ -20,15 +21,8 @@ class CursoController extends Controller
         return view('cursos.create');
     }
 
-    public function store(Request $request){ //ESTE METODO SE ENCARGA DE GUARDAR LOS DATOS EN LA BASE DE DATOS CREATE 
-
-    //ANTES DE LA INTANCIA PASAMOS UNA VALIDACION DE LOS CAMPOS QUE VAMOS A GUARDAR 
-        $request->validate([
-            'name'=>['required','min:3'],
-            'descripcion'=>'required',
-            'categoria'=>'required'
-        ]);
-
+    public function store(StoreCurso $request){ //ESTE M ETODO SE ENCARGA DE GUARDAR LOS DATOS EN LA BASE DE DATOS CREATE 
+  
         $curso = new Curso(); //hacemos intancia el modelo 
 
         $curso->name =$request->name;
@@ -50,7 +44,13 @@ class CursoController extends Controller
     }
 
     public function update(Request $request, Curso $curso){
-        $curso->name = $request->name ;
+          $request->validate([
+            'name'=>'required|min:3',
+            'descripcion'=>'required',
+            'categoria'=>'required'
+        ]);
+        
+        $curso->name = $request->name;
         $curso->descripcion = $request->descripcion;
         $curso->categoria = $request->categoria;
 
@@ -59,5 +59,5 @@ class CursoController extends Controller
         return redirect()->route('cursos.show', $curso);
 
     }
-
+    
 }
