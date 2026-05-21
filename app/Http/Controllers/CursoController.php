@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCurso;
 use App\Models\Curso;  //RECUERDA QUE TENEMOS QUE INDICARLE EL MODELO QUE VAMOS A USAR 
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\DescriptionList\Node\Description;
 
 class CursoController extends Controller
 {
@@ -21,16 +22,8 @@ class CursoController extends Controller
         return view('cursos.create');
     }
 
-    public function store(StoreCurso $request){ //ESTE M ETODO SE ENCARGA DE GUARDAR LOS DATOS EN LA BASE DE DATOS CREATE 
-  
-        $curso = new Curso(); //hacemos intancia el modelo 
-
-        $curso->name =$request->name;
-        $curso->descripcion =$request->descripcion;
-        $curso->categoria =$request->categoria; 
-        
-        $curso->save();
-        //return redirect()->route('cursos.show', $curso->id);
+    public function store(StoreCurso $request){ //ESTE M ETODO SE ENCARGA DE GUARDAR LOS DATOS EN LA BASE DE DATOS CREATE     
+        $curso = Curso::create($request->all());
         return redirect()->route('cursos.show', $curso);
     }
 
@@ -50,12 +43,8 @@ class CursoController extends Controller
             'categoria'=>'required'
         ]);
         
-        $curso->name = $request->name;
-        $curso->descripcion = $request->descripcion;
-        $curso->categoria = $request->categoria;
-
-        //return $curso;
-        $curso->save();
+    
+        $curso->update($request->all());
         return redirect()->route('cursos.show', $curso);
 
     }
