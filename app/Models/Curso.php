@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 class Curso extends Model
 {
@@ -15,10 +16,16 @@ class Curso extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'descripcion',
         'categoria'
     ];
 
+    
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
 }
 
