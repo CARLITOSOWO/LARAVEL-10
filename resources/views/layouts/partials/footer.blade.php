@@ -1,0 +1,3 @@
+<footer>
+    ESTE ES EL PIE DE PAGINA 
+</footer>
