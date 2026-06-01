@@ -14,12 +14,12 @@ class ContactanosMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $data;//CUALQUIER PROPIEDAD PUBLICA PUEDE ACCEDER A DATA
+   
+
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**

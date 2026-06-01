@@ -15,5 +15,11 @@
 <body>
     <h1>Correo electronico </h1>
     <p>ESTE ES EL PRIMER CORREO QUE MANDAMOS POR LARAVEL </p>
+
+    <p><strong>Nombre:</strong>{{$data['name']}}</p>
+    <p><strong>Correo:</strong>{{$data['correo']}}</p>
+    <p><strong>Mensaje:</strong>{{$data['mensaje']}}</p>
+
+
 </body>
 </html>
