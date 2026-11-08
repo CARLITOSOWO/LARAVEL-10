@@ -13,6 +13,7 @@ public function index(){
 }
 
 
+//? 
 public function store(Request $request)
 {
     $request->validate([
@@ -22,12 +23,10 @@ public function store(Request $request)
 
     ]);
 
-
-
-    Mail::to('guerramuertec@gmail.com')->send(new ContactanosMailable($request->all()));
+    Mail::to('guerramuertec@gmail.com')
+    ->send(new ContactanosMailable($request->all()));
 
     // session()->flash('info', 'MENSAJE ENVIADO CON SESSION 😁😁😁😁🥞');//1ER FORMA CON HELPER SESSION
-
     return redirect()->route('contactanos.index')->with('info', 'MENSAJE ENVIADO CON WITH 😁😁😁😁🥞');
 }
 
